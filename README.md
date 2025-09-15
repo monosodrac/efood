@@ -1,69 +1,71 @@
-# React + TypeScript + Vite
+# 🌮 Efood
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Projeto desenvolvido durante o curso **Desenvolvedor Full-Stack Python** da [EBAC](https://ebaconline.com.br/).
 
-Currently, two official plugins are available:
+🌐 **Objetivo:** Criar uma landing page interativa para um site de listagem de restaurantes, utilizando tecnologias como **React**, **TypeScript** e **styled-components** para explorar boas práticas de UI/UX e interatividade na web.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+📎 [Acesse aqui](https://efood-sodrac.vercel.app/)
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## 🎬 Sobre o Projeto
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+A landing page foi construída com foco na imersão visual e facilidade de navegação. Ela destaca o layout com alguns exemplos de restaurantes, e segue com um direcionamento de rotas para informações do restaurante.
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+O uso de **styled-components** permite uma organização encapsulada dos estilos, enquanto o **react-router-dom** é empregado para implementar navegação por abas.
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+---
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## 📚 Funcionalidades e Destaques
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+- ✅ **Componentização com Props:**
+  Os componentes recebem dados dinâmicos através de props, garantindo maior reaproveitamento e flexibilidade na interface.
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- ✅ **Estilização com Styled-Components:**  
+  Cada parte da aplicação é estilizada utilizando styled-components, permitindo CSS encapsulado, temático e mais organizado.
+
+- ✅ **Navegação com React Router DOM:**  
+  A navegação entre páginas e seções é feita de forma fluida com o react-router-dom, sem recarregar a aplicação.
+
+- ✅ **Organização com Models:**  
+  A estrutura de models garante tipagem, consistência e clareza no gerenciamento dos dados utilizados na aplicação.
+
+---
+
+## 🛠️ Tecnologias Utilizadas
+
+- React + Vite  
+- Styled-Components   
+- TypeScript      
+- React Router Dom  
+- Props
+
+---
+
+## 📁 Estrutura do Repositório
+
+```bash
+📂 ponte-para-terabitia/
+├── public/
+├── src/
+│   ├── assets/
+│   │   └── images/
+│   ├── components/
+│   ├── models/
+│   ├── pages/
+│   ├── App.tsx
+│   ├── main.tsx
+│   ├── routes.tsx
+│   ├── styles.ts
+│   ├── vite-env.d.ts
+├── .gitignore
+├── README.md
+├── eslint.config.js
+├── index.html
+├── package-lock.json
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vercel.json
+└── vite.config.ts
