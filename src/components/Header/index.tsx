@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 
-import { ImageOne, ImageBanner, TitleOne, Image, Title, TitleBanner, CategBanner } from "./styles";
+import { ImageOne, TitleOne, Image, Title } from "./styles";
 
 import bgItal from '../../assets/images/fundo-ital.png'
 import bg from '../../assets/images/fundo.png'
@@ -33,16 +33,6 @@ const Header = () => (
                 </Title>
             </div>
         </Image>
-        <ImageBanner style={{ backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)), url(${bgItal})` }}>
-            <div className="container">
-                <CategBanner>
-                    Italiana
-                </CategBanner>
-                <TitleBanner>
-                    La Dolce Vita Trattoria
-                </TitleBanner>
-            </div>
-        </ImageBanner>
     </div>
 );
 

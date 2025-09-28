@@ -17,21 +17,31 @@ import {
 import estrela from '../../assets/images/estrela.svg'
 
 type Props = {
+    id: number
     title: string
     category: string
-    aval?: string
+    aval?: number
     description: string
     infos?: string[]
     image: string
 }
 
 const CardRestaurant = ({
+    id,
     title,
     description,
     aval,
     infos,
     image
-}: Props) => (
+}: Props) => {
+    const getDescricao = (descricao: string) => {
+        if (descricao.length > 253) {
+            return descricao.slice(0, 250) + '...';
+        };
+        return descricao
+    };
+
+    return (
     <CardRest>
         <img src={image} alt={title} />
         <InfosRest>
@@ -46,31 +56,31 @@ const CardRestaurant = ({
                     {aval} <img src={estrela} alt="Nota" />
                 </TitleRest>
             </div>
-            <DescriptionRest>{description}</DescriptionRest>
-            <Link to="/categories">
+            <DescriptionRest title={description}>{getDescricao(description)}</DescriptionRest>
+            <Link to={`/products/${id}`}>
                 <Tag size="big">
                     Saiba mais
                 </Tag>
             </Link>
         </CardInfoRest>
     </CardRest>
-);
+)};
 
-const CardMenu = ({
-    title,
-    description,
-    image
-}: Props) => (
-    <CardMen>
-        <img src={image} alt={title} />
-        <CardInfoMen>
-            <TitleMen>{title}</TitleMen>
-            <DescriptionMen>{description}</DescriptionMen>
-            <Link to="/categories">
-                Adicionar ao carrinho
-            </Link>
-        </CardInfoMen>
-    </CardMen>
-);
+// const CardMenu = ({
+//     title,
+//     description,
+//     image
+// }: Props) => (
+//     <CardMen>
+//         <img src={image} alt={title} />
+//         <CardInfoMen>
+//             <TitleMen>{title}</TitleMen>
+//             <DescriptionMen>{description}</DescriptionMen>
+//             <Link to="/categories">
+//                 Adicionar ao carrinho
+//             </Link>
+//         </CardInfoMen>
+//     </CardMen>
+// );
 
-export { CardRestaurant, CardMenu };
+export { CardRestaurant };

@@ -10,7 +10,9 @@ export const CardRest = styled.div`
     border: 1px solid ${colors.pink};
 
     img {
+        height: 217px;
         width: 100%;
+        object-fit: cover;
     }
 
     div {
@@ -71,6 +73,8 @@ export const CardMen = styled.div`
 
     img {
         width: 100%;
+        height: 167px;
+        object-fit: cover;
     }
 
     div {
@@ -88,15 +92,6 @@ export const CardInfoMen = styled.div`
     flex-direction: column;
     font-size: 14px;
     color: ${colors.white};
-
-    a {
-        padding: 4px;
-        text-align: center;
-        font-weight: 700;
-        background-color: ${colors.white};
-        color: ${colors.pink};
-        text-decoration: none;
-    }
 `
 
 export const TitleMen = styled.h3`

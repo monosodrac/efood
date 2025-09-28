@@ -49,36 +49,3 @@ export const Title = styled.h2`
     font-size: 18px;
     color: ${colors.pink};
 `
-
-export const ImageBanner = styled.header`
-    position: relative;
-    width: 100%;
-    height: 280px;
-    background-repeat: no-repeat;
-    background-size: cover;
-    
-    .container {
-        display: flex;
-        flex-direction: row;
-        justify-content: space-between;
-        align-items: center;
-        text-align: center;
-        padding: 64px 0;
-    }
-`
-
-export const CategBanner = styled.h3`
-    position: absolute;
-    top: 24px;
-    font-weight: 100;
-    font-size: 32px;
-    color: #fff;
-`
-
-export const TitleBanner = styled.h2`
-    position: absolute;
-    bottom: 32px;
-    font-weight: 900;
-    font-size: 32px;
-    color: #fff;
-`
