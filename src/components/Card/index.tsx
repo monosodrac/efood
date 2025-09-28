@@ -8,10 +8,6 @@ import {
     CardInfoRest,
     TitleRest,
     DescriptionRest,
-    CardMen,
-    CardInfoMen,
-    TitleMen,
-    DescriptionMen,
 } from "./styles";
 
 import estrela from '../../assets/images/estrela.svg'
@@ -65,22 +61,5 @@ const CardRestaurant = ({
         </CardInfoRest>
     </CardRest>
 )};
-
-// const CardMenu = ({
-//     title,
-//     description,
-//     image
-// }: Props) => (
-//     <CardMen>
-//         <img src={image} alt={title} />
-//         <CardInfoMen>
-//             <TitleMen>{title}</TitleMen>
-//             <DescriptionMen>{description}</DescriptionMen>
-//             <Link to="/categories">
-//                 Adicionar ao carrinho
-//             </Link>
-//         </CardInfoMen>
-//     </CardMen>
-// );
 
 export { CardRestaurant };
