@@ -1,6 +1,5 @@
 import { ImageBanner, TitleBanner, CategBanner } from "./styles";
 
-import bgItal from '../../assets/images/fundo-ital.png';
 import type { Restaurant } from "../../pages/Home";
 
 type Props = {

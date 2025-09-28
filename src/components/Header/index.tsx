@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 
 import { ImageOne, TitleOne, Image, Title } from "./styles";
 
-import bgItal from '../../assets/images/fundo-ital.png'
 import bg from '../../assets/images/fundo.png'
 import logo from '../../assets/images/logo.png'
 
