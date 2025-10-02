@@ -1,9 +1,10 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { JSX } from 'react/jsx-runtime';
 import { RestaurantsList } from '../../components/CardsList';
 
 import { HeaderOne } from '../../components/Header';
 
-import { useEffect, useState } from 'react';
+import { useGetRestaurantsQuery } from '../../services/api';
 
 export type Restaurant = {
   map(arg0: (cardapio: any) => JSX.Element): import("react").ReactNode;
@@ -26,20 +27,22 @@ export type Restaurant = {
 };
 
 const Home = () => {
-  const [restaurant, setRestaurant] = useState<Restaurant[]>([]);
+  const { data } = useGetRestaurantsQuery();
 
-  useEffect(() => {
-    fetch('https://ebac-fake-api.vercel.app/api/efood/restaurantes')
-      .then(res => res.json())
-      .then(res => setRestaurant(res))
-  }, []);
-
+  if (data) {
+    return (
+      <>
+        <HeaderOne />
+        <RestaurantsList restaurants={data} />
+      </>
+    )
+  };
   return (
-    <>
-      <HeaderOne />
-      <RestaurantsList restaurants={restaurant} />
-    </>
+    <h4>
+      Carregando...
+    </h4>
   )
+
 };
 
 export default Home;

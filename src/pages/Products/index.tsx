@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
+/* eslint-disable @typescript-eslint/no-explicit-any */
+import { useState } from 'react';
 import { useParams } from 'react-router-dom';
-
-import type { Restaurant } from '../Home';
 
 import { Header } from '../../components/Header';
 import Hero from '../../components/Hero';
@@ -12,6 +11,7 @@ import { Modal, ModalContent } from './styles';
 
 import fechar from '../../assets/images/close.png'
 import Button from '../../components/Button';
+import { useGetRestaurantQuery } from '../../services/api';
 
 interface ModalState {
   id: number
@@ -25,14 +25,7 @@ interface ModalState {
 
 const Products = () => {
   const { id } = useParams();
-
-  const [restaurant, setRestaurant] = useState<Restaurant>();
-
-  useEffect(() => {
-    fetch(`https://ebac-fake-api.vercel.app/api/efood/restaurantes/${id}`)
-      .then(res => res.json())
-      .then(res => setRestaurant(res))
-  }, [id]);
+  const { data: restaurant } = useGetRestaurantQuery(id!)
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 217) {
