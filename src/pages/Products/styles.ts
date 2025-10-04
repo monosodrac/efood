@@ -33,15 +33,18 @@ export const ModalContent = styled.div`
 
 
     .modal {
+        position: relative;
         display: flex;
         flex-direction: column;
         align-items: end;
+        padding: 32px;
         width: 100%;
         background-color: ${colors.pink};
         
         .fechar-modal {
-            justify-self: end;
-            margin: 8px;
+            position: absolute;
+            top: 8px;
+            right: 8px;
             height: 16px;
             width: 16px;
             cursor: pointer;
@@ -50,7 +53,6 @@ export const ModalContent = styled.div`
         .card-modal {
             display: flex;
             column-gap: 24px;
-            margin: 32px;
             color: #fff;
 
             .foto-modal {
