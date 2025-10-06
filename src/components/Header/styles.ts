@@ -48,4 +48,5 @@ export const Title = styled.h2`
     font-weight: 900;
     font-size: 18px;
     color: ${colors.pink};
+    cursor: pointer;
 `

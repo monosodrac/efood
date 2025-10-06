@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import type { JSX } from 'react/jsx-runtime';
 import { RestaurantsList } from '../../components/CardsList';
 

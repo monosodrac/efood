@@ -1,4 +1,3 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
 
@@ -12,6 +11,9 @@ import { Modal, ModalContent } from './styles';
 import fechar from '../../assets/images/close.png'
 import Button from '../../components/Button';
 import { useGetRestaurantQuery } from '../../services/api';
+import { useDispatch } from 'react-redux';
+import { add, open } from '../../store/reducers/cart';
+import type { Restaurant } from '../Home';
 
 interface ModalState {
   id: number
@@ -23,9 +25,36 @@ interface ModalState {
   isVisible: boolean
 }
 
-const Products = () => {
+export const formatPrice = (preco = 0) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(preco)
+}
+
+type Props = {
+  restaurant: Restaurant
+}
+
+const Products = ({ restaurant: rest}: Props) => {
   const { id } = useParams();
   const { data: restaurant } = useGetRestaurantQuery(id!)
+  const dispatch = useDispatch();
+
+const addToCart = () => {
+  const item = {
+    id: modal.id,
+    foto: modal.foto,
+    nome: modal.titulo,
+    descricao: modal.descricao,
+    porcao: modal.porcao,
+    preco: modal.preco
+  }
+
+  dispatch(add(item))
+  dispatch(open())
+  closeModal()
+}
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 217) {
@@ -66,13 +95,6 @@ const Products = () => {
       preco: 0,
       isVisible: false
     })
-  }
-
-  const formataPreco = (preco = 0) => {
-    return new Intl.NumberFormat('pt-BR', {
-      style: 'currency',
-      currency: 'BRL'
-    }).format(preco)
   }
 
   if (!restaurant) {
@@ -124,8 +146,8 @@ const Products = () => {
                       <br />
                       Serve: de {modal.porcao}
                     </p>
-                    <Button>
-                      Adicionar ao carrinho - {formataPreco(modal.preco)}
+                    <Button onClick={addToCart}>
+                      Adicionar ao carrinho - {formatPrice(modal.preco)}
                     </Button>
                   </div>
                 </div>

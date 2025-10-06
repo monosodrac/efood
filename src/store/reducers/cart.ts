@@ -1,23 +1,50 @@
-import { createSlice, type PayloadAction } from '@reduxjs/toolkit';
-import { type Restaurant } from '../../pages/Home';
+import { createSlice, type PayloadAction } from '@reduxjs/toolkit'
+
+export type MenuItem = {
+  id: number
+  foto: string
+  nome: string
+  descricao: string
+  porcao: string
+  preco: number
+}
 
 type CartState = {
-    items: Restaurant[]
-};
+  items: MenuItem[]
+  isOpen: boolean
+}
 
 const initialState: CartState = {
-    items: []
-};
+  items: [],
+  isOpen: false
+}
 
 const cartSlice = createSlice({
-    name: 'cart',
-    initialState,
-    reducers: {
-        add: (state, action: PayloadAction<Restaurant>) => {
-            state.items.push(action.payload)
-        }
-    }
-});
+  name: 'cart',
+  initialState,
+  reducers: {
+    add: (state, action: PayloadAction<MenuItem>) => {
+      const itemExists = state.items.find(
+        (item) => item.id === action.payload.id
+      )
 
-export const { add } = cartSlice.actions;
+      if (!itemExists) {
+        state.items.push(action.payload)
+      } else {
+        alert('O prato já está no carrinho')
+      }
+    },
+    remove: (state, action: PayloadAction<number>) => {
+      state.items = state.items.filter((item) => item.id !== action.payload)
+    },
+    open: (state) => {
+      state.isOpen = true
+    },
+    close: (state) => {
+      state.isOpen = false
+    }
+  }
+})
+
+export const { add, remove, open, close } = cartSlice.actions
 export default cartSlice.reducer

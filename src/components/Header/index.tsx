@@ -1,6 +1,10 @@
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from "react-router-dom";
 
 import { ImageOne, TitleOne, Image, Title } from "./styles";
+
+import type { RootReducer } from '../../store';
+import { open } from '../../store/reducers/cart'
 
 import bg from '../../assets/images/fundo.png'
 import logo from '../../assets/images/logo.png'
@@ -17,22 +21,31 @@ const HeaderOne = () => (
     </ImageOne>
 );
 
-const Header = () => (
-    <div>
-        <Image style={{ backgroundImage: `url(${bg})` }}>
-            <div className="container">
-                <Link to="/">
-                    <Title>
-                        Restaurantes
+const Header = () => {
+    const dispatch = useDispatch();
+    const { items } = useSelector((state: RootReducer) => state.cart);
+
+    const openCart = () => {
+        dispatch(open());
+    };
+
+    return (
+        <div>
+            <Image style={{ backgroundImage: `url(${bg})` }}>
+                <div className="container">
+                    <Link to="/">
+                        <Title>
+                            Restaurantes
+                        </Title>
+                    </Link>
+                    <img src={logo} alt="Logo EFOOD" />
+                    <Title onClick={openCart}>
+                        {items.length} produto(s) no carrinho
                     </Title>
-                </Link>
-                <img src={logo} alt="Logo EFOOD" />
-                <Title>
-                    0 produto(s) no carrinho
-                </Title>
-            </div>
-        </Image>
-    </div>
-);
+                </div>
+            </Image>
+        </div>
+    )
+};
 
 export { Header, HeaderOne };

@@ -1,6 +1,6 @@
-import Button from '../Button'
+import { useDispatch, useSelector } from 'react-redux';
 
-import pizzaMarg from '../../assets/images/pizza-marg.png'
+import Button from '../Button'
 
 import {
   CartContainer,
@@ -9,45 +9,53 @@ import {
   Prices,
   Sidebar
 } from './styles'
+import type { RootReducer } from '../../store';
+import { close, remove, type MenuItem } from '../../store/reducers/cart';
+import { formatPrice } from '../../pages/Products';
 
-const Cart = () => (
-  <CartContainer>
-    <Overlay />
-    <Sidebar>
-      <ul>
-        <CartItem>
-          <img src={pizzaMarg} alt="" />
-          <div>
-            <h3>Pizza Marguerita</h3>
-            <span>R$ 60,90</span>
-          </div>
-          <button type="button" />
-        </CartItem>
-        <CartItem>
-          <img src={pizzaMarg} alt="" />
-          <div>
-            <h3>Pizza Marguerita</h3>
-            <span>R$ 60,90</span>
-            <button type="button" />
-          </div>
-        </CartItem>
-        <CartItem>
-          <img src={pizzaMarg} alt="" />
-          <div>
-            <h3>Pizza Marguerita</h3>
-            <span>R$ 60,90</span>
-            <button type="button" />
-          </div>
-        </CartItem>
-      </ul>
-      <Prices>
-        Valor total <span>R$ 182,70</span>
-      </Prices>
-      <Button>
-        Continuar com a entrega
-      </Button>
-    </Sidebar>
-  </CartContainer>
-)
+const Cart = () => {
+  const items = useSelector((state: RootReducer) => state.cart.items as MenuItem[]);
+  const { isOpen } = useSelector((state: RootReducer) => state.cart);
+
+  const dispatch = useDispatch();
+
+  const closeCart = () => {
+    dispatch(close());
+  };
+
+  const getTotalPrice = () => {
+    return items.reduce((total, item) => total + item.preco, 0)
+  }
+
+  const removeItem = (id: number) => {
+    dispatch(remove(id));
+  }
+
+  return (
+    <CartContainer className={isOpen ? 'is-open' : ''}>
+      <Overlay onClick={closeCart} />
+      <Sidebar>
+        <ul>
+          {items.map((item) => (
+            <CartItem key={item.id}>
+              <img src={item.foto} alt={item.nome} />
+              <div>
+                <h3>{item.nome}</h3>
+                <span>{formatPrice(item.preco)}</span>
+              </div>
+              <button onClick={() => removeItem(item.id)} type="button" />
+            </CartItem>
+          ))}
+        </ul>
+        <Prices>
+          Valor total <span>{formatPrice(getTotalPrice())}</span>
+        </Prices>
+        <Button>
+          Continuar com a entrega
+        </Button>
+      </Sidebar>
+    </CartContainer>
+  )
+}
 
 export default Cart
