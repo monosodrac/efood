@@ -13,7 +13,6 @@ import Button from '../../components/Button';
 import { useGetRestaurantQuery } from '../../services/api';
 import { useDispatch } from 'react-redux';
 import { add, open } from '../../store/reducers/cart';
-import type { Restaurant } from '../Home';
 
 interface ModalState {
   id: number
@@ -32,11 +31,7 @@ export const formatPrice = (preco = 0) => {
   }).format(preco)
 }
 
-type Props = {
-  restaurant: Restaurant
-}
-
-const Products = ({ restaurant: rest}: Props) => {
+const Products = () => {
   const { id } = useParams();
   const { data: restaurant } = useGetRestaurantQuery(id!)
   const dispatch = useDispatch();

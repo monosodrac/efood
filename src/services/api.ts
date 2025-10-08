@@ -3,7 +3,7 @@ import type { Restaurant } from '../pages/Home';
 
 const api = createApi({
     baseQuery: fetchBaseQuery({
-        baseUrl: 'https://ebac-fake-api.vercel.app/api/efood'
+        baseUrl: 'https://api-ebac.vercel.app/api/efood'
     }),
     endpoints: (builder) => ({
         getRestaurants: builder.query<Restaurant[], void>({
