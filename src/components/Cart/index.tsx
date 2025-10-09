@@ -3,25 +3,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import Button from '../Button'
 
 import {
-  CartContainer,
-  Overlay,
+  CartItems,
   CartItem,
   Prices,
-  Sidebar
 } from './styles'
 import type { RootReducer } from '../../store';
-import { close, remove, type MenuItem } from '../../store/reducers/cart';
+import { remove, type MenuItem } from '../../store/reducers/cart';
 import { formatPrice } from '../../pages/Products';
+import AsideBar from '../AsideBar';
 
 const Cart = () => {
   const items = useSelector((state: RootReducer) => state.cart.items as MenuItem[]);
-  const { isOpen } = useSelector((state: RootReducer) => state.cart);
 
   const dispatch = useDispatch();
-
-  const closeCart = () => {
-    dispatch(close());
-  };
 
   const getTotalPrice = () => {
     return items.reduce((total, item) => total + item.preco, 0)
@@ -32,10 +26,9 @@ const Cart = () => {
   }
 
   return (
-    <CartContainer className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
-      <Sidebar>
-        <ul>
+    <AsideBar>
+      <>
+        <CartItems>
           {items.map((item) => (
             <CartItem key={item.id}>
               <img src={item.foto} alt={item.nome} />
@@ -46,15 +39,17 @@ const Cart = () => {
               <button onClick={() => removeItem(item.id)} type="button" />
             </CartItem>
           ))}
-        </ul>
+        </CartItems>
         <Prices>
           Valor total <span>{formatPrice(getTotalPrice())}</span>
         </Prices>
-        <Button>
-          Continuar com a entrega
-        </Button>
-      </Sidebar>
-    </CartContainer>
+        <div className="cta-button">
+          <Button>
+            Continuar com a entrega
+          </Button>
+        </div>
+      </>
+    </AsideBar>
   )
 }
 
