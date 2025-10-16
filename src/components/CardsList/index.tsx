@@ -1,13 +1,14 @@
-import type { Restaurant } from '../../pages/Home';
 import { CardRestaurant } from '../Card';
+import Loader from '../Loader';
 
 import { Container, ListRestaurant } from './styles';
 
 type Props = {
     restaurants?: Restaurant[]
+    isLoading: boolean
 };
 
-const RestaurantsList = ({ restaurants }: Props) => {
+const RestaurantsList = ({ restaurants, isLoading }: Props) => {
     const getRestaurantTags = (restaurant: Restaurant) => {
         const tags = [];
 
@@ -18,6 +19,9 @@ const RestaurantsList = ({ restaurants }: Props) => {
 
         return tags;
     };
+    if (isLoading) {
+        return <Loader />
+    }
 
     return (
     <Container>

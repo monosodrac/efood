@@ -1,7 +1,5 @@
 import { ImageBanner, TitleBanner, CategBanner } from "./styles";
 
-import type { Restaurant } from "../../pages/Home";
-
 type Props = {
     restaurant: Restaurant
 }

@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import { useParams } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
 
 import { Header } from '../../components/Header';
 import Hero from '../../components/Hero';
+import Button from '../../components/Button';
+import Loader from '../../components/Loader';
 
 import { Container, ListMenu } from '../../components/CardsList/styles';
 import { CardInfoMen, CardMen, DescriptionMen, TitleMen } from '../../components/Card/styles';
 import { Modal, ModalContent } from './styles';
 
 import fechar from '../../assets/images/close.png'
-import Button from '../../components/Button';
+
 import { useGetRestaurantQuery } from '../../services/api';
-import { useDispatch } from 'react-redux';
 import { add, open } from '../../store/reducers/cart';
+import { parseToBrl } from '../../utils';
 
 interface ModalState {
   id: number
@@ -24,32 +27,25 @@ interface ModalState {
   isVisible: boolean
 }
 
-export const formatPrice = (preco = 0) => {
-  return new Intl.NumberFormat('pt-BR', {
-    style: 'currency',
-    currency: 'BRL'
-  }).format(preco)
-}
-
 const Products = () => {
   const { id } = useParams();
   const { data: restaurant } = useGetRestaurantQuery(id!)
   const dispatch = useDispatch();
 
-const addToCart = () => {
-  const item = {
-    id: modal.id,
-    foto: modal.foto,
-    nome: modal.titulo,
-    descricao: modal.descricao,
-    porcao: modal.porcao,
-    preco: modal.preco
-  }
+  const addToCart = () => {
+    const item = {
+      id: modal.id,
+      foto: modal.foto,
+      nome: modal.titulo,
+      descricao: modal.descricao,
+      porcao: modal.porcao,
+      preco: modal.preco
+    }
 
-  dispatch(add(item))
-  dispatch(open())
-  closeModal()
-}
+    dispatch(add(item))
+    dispatch(open())
+    closeModal()
+  }
 
   const getDescricao = (descricao: string) => {
     if (descricao.length > 217) {
@@ -93,7 +89,7 @@ const addToCart = () => {
   }
 
   if (!restaurant) {
-    return <h3>Carregando...</h3>
+    return <Loader />
   };
 
   return (
@@ -103,7 +99,7 @@ const addToCart = () => {
       <Container>
         <div className="container">
           <ListMenu>
-            {restaurant.cardapio.map((cardapio) => (
+            {restaurant.cardapio.map((cardapio: Cardapio) => (
               <li key={cardapio.id}>
                 <CardMen>
                   <img src={cardapio.foto} alt={cardapio.nome} />
@@ -142,7 +138,7 @@ const addToCart = () => {
                       Serve: de {modal.porcao}
                     </p>
                     <Button onClick={addToCart}>
-                      Adicionar ao carrinho - {formatPrice(modal.preco)}
+                      Adicionar ao carrinho - {parseToBrl(modal.preco)}
                     </Button>
                   </div>
                 </div>

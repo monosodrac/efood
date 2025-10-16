@@ -1,4 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
+import type { JSX } from 'react';
 
 type Props = {
   children: JSX.Element
@@ -10,21 +11,16 @@ import {
   Sidebar
 } from './styles'
 import type { RootReducer } from '../../store';
-import { close } from '../../store/reducers/cart';
-import type { JSX } from 'react';
+import { closeCartAction } from '../../utils';
 
 const AsideBar = ({children}: Props) => {
   const { isOpen } = useSelector((state: RootReducer) => state.cart);
 
   const dispatch = useDispatch();
 
-  const closeCart = () => {
-    dispatch(close());
-  };
-
   return (
     <Container className={isOpen ? 'is-open' : ''}>
-      <Overlay onClick={closeCart} />
+      <Overlay onClick={() => closeCartAction(dispatch)} />
       <Sidebar>
         {children}
       </Sidebar>
